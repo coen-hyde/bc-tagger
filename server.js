@@ -18,12 +18,19 @@ app.use(bodyParser.json());
 // Add routes
 app.use('/tags', Routes.tags);
 
+// Call all 404
+app.get('/*', function(req, res, next) {
+  res.status(404).send();
+});
+
 /**
  * Create all tables in sqlite
  * @param {Function} callback
  */
 function initTables(cb) {
-  return Models.db.sync().nodeify(cb);
+  var Models = require('./models');
+  var db = require('./db');
+  return db.sync().nodeify(cb);
 }
 
 /**

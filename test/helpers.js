@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var request = require('request');
 var config = require('../config');
 var helpers = {};
 
@@ -44,7 +45,7 @@ helpers.makeRequest = function(method, path, data, cb) {
     method: method,
     headers: headers,
     body: body
-  };
+  }; 
 
   return request(options, function(err, res, body) {
     if (err) return cb(err);
