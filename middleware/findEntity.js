@@ -1,11 +1,17 @@
 'use strict';
 
+var _ = require('lodash');
 var findById = require('./findById');
 var Models = require('../models');
 var Entity = Models.entity;
 var EntityTag = Models['entity-tag'];
 
 var findEntity = function(options) {
+  var options = options || {};
+  _.defaults(options, {
+    strict: true
+  });
+
   return function(req, res, next) {
     var type = req.params.entityType;
     var id = req.params.entityId;

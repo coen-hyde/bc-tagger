@@ -37,6 +37,18 @@ describe('Tags', function() {
       });
     });
   });
+
+  describe('POST Entity Tags', function() {
+    it('should return status 201 when a new entity is created', function(done) {
+      makeRequest('POST', '/tags/product/30', { tags: ['Music'] }, function(err, res, body) {
+        expect(res.statusCode).to.equal(201);
+        expect(body.type).to.equal('product');
+        expect(body.tags.length).to.equal(1);
+        expect(body.tags).to.contain('Music');
+        done();
+      });
+    });
+  });
 });
 
 describe('Stats', function() {

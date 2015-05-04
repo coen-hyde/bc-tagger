@@ -12,7 +12,7 @@ var _ = require('lodash');
  */ 
 var findById = function(model, param, options) {
   _.defaults(options, {
-    strict: false
+    strict: true
   });
 
   return function(req, res, next) {
