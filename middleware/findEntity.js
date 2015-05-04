@@ -6,6 +6,12 @@ var Models = require('../models');
 var Entity = Models.entity;
 var EntityTag = Models['entity-tag'];
 
+/*
+ * Middleware to find an entity record
+ *
+ * @param {Object} An object with options
+ * @param {Boolean} [options.strict=true] Return 404 if record isn't found
+ */ 
 var findEntity = function(options) {
   var options = options || {};
   _.defaults(options, {
@@ -19,15 +25,7 @@ var findEntity = function(options) {
       return res.status(400).send('entity type and entity id are required');
     }
 
-    // Cast id as integer
-    id = parseInt(id, 10);
-
-    var query = {
-      where: { type: type, foreignId: id },
-      include: [ { model: EntityTag, as: 'tags' } ]
-    };
-
-    Models.entity.findOne(query).nodeify(function(err, entity) {
+    Models.entity.findByTypeAndId(type, id).nodeify(function(err, entity) {
       if (err) return next(err);
       if (entity) {
         res.locals.entity = entity;

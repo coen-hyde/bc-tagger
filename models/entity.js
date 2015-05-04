@@ -33,7 +33,7 @@ var Entity = db.define('Entity', {
       var EntityTag = require('./entity-tag');
 
       // Remove all existing tags
-      return this.setTags([])
+      return EntityTag.destroy({where: {EntityId: entity.id}})
         // Then create tags
         .then(function() {
           return Promise.map(tags, function(tag) {
@@ -41,8 +41,9 @@ var Entity = db.define('Entity', {
               return entity.setTags([entityTag]);
             });
           });
-        });
-    }
+        })
+        .return(entity);
+    },
   },
   classMethods: {
     associate: function(Models) {
@@ -50,30 +51,26 @@ var Entity = db.define('Entity', {
     },
 
     /*
-     * Update entity tags. If entity already exists then replace tags with new tags
+     * Find an entity by it's type and foreignId
      *
      * @param {String} type
      * @param {Integer} id
-     * @param {Array} tags
+     * @return {Promise}
      */
-    updateTags: function(type, id, tags, cb) {
+    findByTypeAndId: function(type, id) {
       var EntityTag = require('./entity-tag');
 
+      // Cast id as integer
+      id = parseInt(id, 10);
+
       var query = {
-        where: { type: type, foreignId: id }
+        where: { type: type, foreignId: id },
+        include: [ { model: EntityTag, as: 'tags' } ]
       };
 
-      Entity
-        .findOrCreate(query)
-        .spread(function(entity) {
-          return entity.updateTags(tags)
-        })
-        .then(function() {
-          query.include = [{ model: EntityTag, as: 'tags' }]
-          return Entity.findOne(query);
-        })
-        .nodeify(cb);
-    },
+      return Entity.findOne(query);
+    }
+
   }
 });
 

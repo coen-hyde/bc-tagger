@@ -48,6 +48,16 @@ describe('Tags', function() {
         done();
       });
     });
+
+    it('should return status 200 when updating an entity', function(done) {
+      makeRequest('POST', '/tags/product/50', { tags: ['Movie'] }, function(err, res, body) {
+        expect(res.statusCode).to.equal(200);
+        expect(body.type).to.equal('product');
+        expect(body.tags.length).to.equal(1);
+        expect(body.tags).to.contain('Movie');
+        done();
+      });
+    });
   });
 });
 
