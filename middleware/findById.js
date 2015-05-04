@@ -22,8 +22,13 @@ var findById = function(model, param, options) {
     }
 
     id = parseInt(id, 10);
+    var args = [id];
 
-    model.find(id).nodeify(function(err, record) {
+    if (options.include) {
+      args.push({include: options.include});
+    }
+
+    model.find.apply(model, args).nodeify(function(err, record) {
       if (err) return next(err);
       if (record) {
         var modelName = model.name.toLowerCase();

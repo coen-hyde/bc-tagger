@@ -2,12 +2,9 @@
 
 var Sequelize = require('Sequelize');
 var db = require('../db');
-var Entity = require('./entity');
 
-var Tag = db.define('Tag', {
+var EntityTag = db.define('EntityTag', {
   tag: Sequelize.STRING
 });
 
-Tag.belongsTo(Entity);
-
-module.exports = Tag;
+module.exports = EntityTag;

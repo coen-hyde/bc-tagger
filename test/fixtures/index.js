@@ -6,12 +6,23 @@ var Models = require('../../models');
 
 var data = {};
 
-data['entity'] = [{
-  id: 50,
-  type: 'Product'
-}];
+data['entity'] = [
+  {
+    id: 50,
+    type: 'Product'
+  }
+];
 
-data['entity-tag'] = [];
+data['entity-tag'] = [
+  {
+    EntityId: 50,
+    tag: 'Electronic'
+  },
+  {
+    EntityId: 50,
+    tag: 'Entertainment'
+  }
+];
 
 module.exports = {
   reload: function(cb) {
