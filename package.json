@@ -1,0 +1,16 @@
+{
+  "name": "bc-tagger",
+  "version": "0.1.0",
+  "description": "Bugcrowd entity tagging application",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Coen Hyde",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "requirize": "^0.1.0"
+  }
+}
