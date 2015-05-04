@@ -6,7 +6,7 @@ var config = require('./config');
 
 var options = config.get('database:options');
 options.logging = function(msg) {
-  winston.info(msg);
+  winston.debug(msg);
 }
 
 module.exports = new Sequelize(

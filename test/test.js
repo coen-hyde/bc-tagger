@@ -92,4 +92,13 @@ describe('Stats', function() {
       done();
     });
   });
+  it('should return 200 and stats data when requesting stats about a specific entity', function(done) {
+    makeRequest('GET', '/stats/product/50',function(err, res, body) {
+      expect(res.statusCode).to.equal(200);
+      expect(body.length).to.equal(2);
+      var electronicTag = _.find(body, {tag: 'Electronic'});
+      expect(electronicTag.count).to.equal(1);
+      done();
+    });
+  });
 });

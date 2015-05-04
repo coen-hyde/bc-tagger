@@ -12,7 +12,7 @@ var EntityTag = db.define('EntityTag', {
      *
      * @return {Promise}
      */
-    stats: function() {
+    stats: function(id) {
       var query = {
         attributes: [
           'tag',
@@ -20,6 +20,10 @@ var EntityTag = db.define('EntityTag', {
         ], 
         group: ['tag']
       };
+
+      if (id) {
+        query.where = { 'EntityId': id };
+      }
 
       return EntityTag.findAll(query);
     }
