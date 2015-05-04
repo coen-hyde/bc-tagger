@@ -5,7 +5,8 @@ var _ = require('lodash');
 var db = require('../db');
 
 var Entity = db.define('Entity', {
-  type: Sequelize.STRING
+  type: { type: Sequelize.STRING, unique: 'compositeIndex' },
+  foreignId: { type: Sequelize.INTEGER, unique: 'compositeIndex' }
 }, {
   instanceMethods: {
     /*

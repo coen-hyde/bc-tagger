@@ -9,7 +9,7 @@ var router = new express.Router();
 /*
  * Fetch an entity and it's tags
  */
-router.get('/:entityId', mw.findEntity({strict: true}), function(req, res, next) {
+router.get('/:entityType/:entityId', mw.findEntity({strict: true}), function(req, res, next) {
   res.json(res.locals.entity.public());
 });
 

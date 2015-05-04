@@ -8,18 +8,19 @@ var data = {};
 
 data['entity'] = [
   {
-    id: 50,
-    type: 'Product'
+    id: 1,
+    type: 'product',
+    foreignId: 50
   }
 ];
 
 data['entity-tag'] = [
   {
-    EntityId: 50,
+    EntityId: 1,
     tag: 'Electronic'
   },
   {
-    EntityId: 50,
+    EntityId: 1,
     tag: 'Entertainment'
   }
 ];
