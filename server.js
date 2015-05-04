@@ -20,31 +20,35 @@ app.use('/tags', Routes.tags);
 
 /**
  * Create all tables in sqlite
- * @return {Promise}
+ * @param {Function} callback
  */
-function initTables() {
-  return Models.db.sync();
+function initTables(cb) {
+  return Models.db.sync().nodeify(cb);
 }
 
 /**
  * Start express http server
- * @return {Promise}
+ * @param {Function} callback
  */
-function startServer() {
-  return new Promise(function (resolve, reject) {
-    app.listen(config.get('port'), function(err) {
-      if (err) return reject(err);
-      resolve();
-    });
-  })
+function startHttpServer(cb) {
+  app.listen(config.get('port'), cb);
 }
 
-initTables()
-.then(startServer)
-.then(function() {
-  winston.info("Tagger started on port "+config.get('port'));
-})
-.catch(function() {
-  winston.error(err);
-  return winston.info("Tagger failed to start");
-});
+module.exports = {
+  app: app,
+  start: function(cb) {
+    if (!cb) cb = function(){};
+
+    async.series([ initTables, startHttpServer ], function(err) {
+      if (err) {
+        winston.error(err);
+        winston.info("Tagger failed to start");
+      }
+      else {
+        winston.info("Tagger started on port "+config.get('port'));
+      }
+      
+      return cb(err);
+    });
+  }
+}
