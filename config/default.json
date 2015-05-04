@@ -1,0 +1,11 @@
+{
+  "port": 9001,
+  "database": {
+    "name": "tagger",
+    "username": "root",
+    "password": null,
+    "options": {
+      "dialect": "sqlite"
+    }
+  }
+}
