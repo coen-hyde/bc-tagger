@@ -18,9 +18,16 @@ beforeEach(function(done) {
 });
 
 describe('Tags', function() {
-  it('should return status 200 and entity data when requesting GET /tags/:entity', function(done) {
+  it('should return status 404 when requesting an entity that does not exist', function(done) {
+    makeRequest('GET', '/tags/30', function(err, res, body) {
+      expect(res.statusCode).to.equal(404);
+      done();
+    });
+  });
+  it('should return status 200 and entity data when requesting an entity that does exist', function(done) {
     makeRequest('GET', '/tags/50', function(err, res, body) {
       expect(res.statusCode).to.equal(200);
+      expect(body.type).to.equal('Product');
       done();
     });
   });

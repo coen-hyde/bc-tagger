@@ -6,7 +6,11 @@ var Models = require('../../models');
 
 var data = {};
 
-data['entity'] = [];
+data['entity'] = [{
+  id: 50,
+  type: 'Product'
+}];
+
 data['entity-tag'] = [];
 
 module.exports = {
@@ -18,5 +22,6 @@ module.exports = {
       });
     })
     .nodeify(cb);
-  }
+  },
+  data: data
 };
