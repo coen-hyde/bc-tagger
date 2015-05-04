@@ -11,6 +11,11 @@ data['entity'] = [
     id: 1,
     type: 'product',
     foreignId: 50
+  },
+  {
+    id: 2,
+    type: 'product',
+    foreignId: 51
   }
 ];
 
@@ -22,7 +27,11 @@ data['entity-tag'] = [
   {
     EntityId: 1,
     tag: 'Entertainment'
-  }
+  },
+  {
+    EntityId: 2,
+    tag: 'Electronic'
+  },
 ];
 
 module.exports = {

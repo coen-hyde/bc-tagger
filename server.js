@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 // Add routes
 app.use('/tags', Routes.tags);
+app.use('/stats', Routes.stats);
 
 // Call all 404
 app.get('/*', function(req, res, next) {

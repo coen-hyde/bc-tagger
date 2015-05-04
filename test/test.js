@@ -1,6 +1,7 @@
 "use strict";
 
 var async = require('async');
+var _ = require('lodash');
 var mocha = require('mocha');
 var expect = require('expect.js');
 var request = require('request');
@@ -82,5 +83,13 @@ describe('Tags', function() {
 });
 
 describe('Stats', function() {
-
+  it('should return 200 and stats data when requesting /stats', function(done) {
+    makeRequest('GET', '/stats',function(err, res, body) {
+      expect(res.statusCode).to.equal(200);
+      expect(body.length).to.equal(2);
+      var electronicTag = _.find(body, {tag: 'Electronic'});
+      expect(electronicTag.count).to.equal(2);
+      done();
+    });
+  });
 });
