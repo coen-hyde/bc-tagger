@@ -44,6 +44,22 @@ var Entity = db.define('Entity', {
         })
         .return(entity);
     },
+
+    /*
+     * Delete entity
+     *
+     * @return {Promise}
+     */
+    delete: function() {
+      var entity = this;
+      var EntityTag = require('./entity-tag');
+      
+      return EntityTag
+        .destroy({where: {EntityId: entity.id}})
+        .then(function() {
+          return entity.destroy();
+        })
+    }
   },
   classMethods: {
     associate: function(Models) {

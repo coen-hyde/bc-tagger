@@ -1,5 +1,6 @@
 "use strict";
 
+var async = require('async');
 var mocha = require('mocha');
 var expect = require('expect.js');
 var request = require('request');
@@ -59,6 +60,25 @@ describe('Tags', function() {
       });
     });
   });
+
+  describe('DELETE Entity Tags', function() {
+    it('should return 204 and remove entity when deleting an entity', function(done) {
+      async.series([
+        function(next) {
+          makeRequest('DELETE', '/tags/product/50',function(err, res, body) {
+            expect(res.statusCode).to.equal(204);
+            next();
+          });
+        },
+        function(next) {
+          makeRequest('GET', '/tags/product/50',function(err, res, body) {
+            expect(res.statusCode).to.equal(404);
+            next();
+          });
+        }
+      ], done);
+    });
+  })
 });
 
 describe('Stats', function() {
