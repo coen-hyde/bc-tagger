@@ -8,6 +8,6 @@ var Tag = db.define('Tag', {
   tag: Sequelize.STRING
 });
 
-Tag.BelongsTo(Entity);
+Tag.belongsTo(Entity);
 
 module.exports = Tag;

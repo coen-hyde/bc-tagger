@@ -10,4 +10,6 @@ Object.keys(Models).forEach(function(modelName) {
   }
 });
 
+Models.db = db;
+
 module.exports = Models;
