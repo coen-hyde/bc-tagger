@@ -18,9 +18,9 @@ entityRoute.get(mw.findEntity(), function(req, res, next) {
 });
 
 /* =================================
- * POST: Create or update a new entity with tags
+ * PUT: Create or update a new entity with tags
  * ================================= */
-entityRoute.post(mw.findOrCreateEntity(), function(req, res, next) {
+entityRoute.put(mw.findOrCreateEntity(), function(req, res, next) {
   var entity = res.locals.entity;
   var tags = req.body.tags || [];
 
