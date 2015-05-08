@@ -11,6 +11,15 @@ $ npm install
 $ npm test
 ```
 
+Start the server
+================
+
+```
+$ npm start
+```
+
+Or call index.js.
+
 Thoughts and changes to schema
 ------------------------------
 

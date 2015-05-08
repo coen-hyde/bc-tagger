@@ -2,8 +2,9 @@
   "name": "bc-tagger",
   "version": "0.1.0",
   "description": "Bugcrowd entity tagging application",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
+    "start": "node ./index.js",
     "test": "./node_modules/.bin/mocha --reporter spec --ui bdd"
   },
   "author": "Coen Hyde",
